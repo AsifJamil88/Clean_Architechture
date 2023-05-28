@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Solution.Application.NewFolder;
 using Solution.Core.Models;
+using Solution.Infrastructure.UOW;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<EmployeeVacationManagementContext>(
         options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
 
-
+builder.Services.AddTransient<IUOW,UOW>();
+    
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
